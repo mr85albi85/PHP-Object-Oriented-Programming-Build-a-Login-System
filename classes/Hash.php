@@ -9,6 +9,11 @@ class Hash {
 
   public static function salt($length)
   {
+    if (!function_exists('mcrypt_create_iv')) {
+    function mcrypt_create_iv($length) {
+        return openssl_random_pseudo_bytes($length);
+    }
+}
     return mcrypt_create_iv($length);
   }
 
